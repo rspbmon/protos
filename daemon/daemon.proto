@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package daemon;
+
+option go_package = "github.com/rspbmon/daemon/src/gen/daemon;daemon";
+
+import "google/protobuf/timestamp.proto";
+
+service Daemon {
+  rpc GetStatus (GetStatusRequest) returns (GetStatusResponse);
+}
+
+message GetStatusRequest {}
+
+enum ServiceStatus {
+  UNKNOWN = 0;
+  OK = 1;
+  DOWN = 2;
+}
+
+message GetStatusResponse {
+  google.protobuf.Timestamp timestamp = 1;
+  ServiceStatus status = 2;
+}
